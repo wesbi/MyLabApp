@@ -1,92 +1,84 @@
-package com.example.myapplication.lab2;
+package com.example.myapplication.lab2
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
+import android.content.Intent
+import android.os.Bundle
+import android.view.View
+import android.widget.Button
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import com.example.myapplication.R
+import com.google.android.material.textfield.TextInputEditText
 
-import androidx.appcompat.app.AppCompatActivity;
+class MultiplicationTableActivity : AppCompatActivity() {
 
-import com.example.myapplication.R;
-import com.google.android.material.textfield.TextInputEditText;
+    private lateinit var allNumbersButton: Button
+    private lateinit var selectiveButton: Button
+    private lateinit var editTextNumber: TextInputEditText
 
-public class MultiplicationTableActivity extends AppCompatActivity {
-
-    private Button allNumbersButton, selectiveButton;
-    private TextInputEditText editTextNumber;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_multiplication_table);
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_multiplication_table)
 
         // Добавляем стрелочку назад в ActionBar
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setDisplayShowTitleEnabled(false);
-        }
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
 
-        // Инициализация элементов интерфейса
-        initViews();
-
-        // Настройка обработчиков событий
-        setupClickListeners();
+        initViews()
+        setupClickListeners()
     }
 
-    private void initViews() {
-        allNumbersButton = findViewById(R.id.allNumbersButton);
-        selectiveButton = findViewById(R.id.selectiveButton);
-        editTextNumber = findViewById(R.id.editTextNumber);
+    private fun initViews() {
+        allNumbersButton = findViewById(R.id.allNumbersButton)
+        selectiveButton = findViewById(R.id.selectiveButton)
+        editTextNumber = findViewById(R.id.editTextNumber)
     }
 
-    private void setupClickListeners() {
-        allNumbersButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startAllNumbersExercise();
+    private fun setupClickListeners() {
+        allNumbersButton.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(v: View?) {
+                startAllNumbersExercise()
             }
-        });
+        })
 
-        selectiveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startSelectiveExercise();
+        selectiveButton.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(v: View?) {
+                startSelectiveExercise()
             }
-        });
+        })
     }
 
-    @Override
-    public boolean onSupportNavigateUp() {
-        finish();
-        return true;
+    override fun onSupportNavigateUp(): Boolean {
+        finish()
+        return true
     }
 
-    private void startAllNumbersExercise() {
-        Intent intent = new Intent(this, AllNumbersExerciseActivity.class);
-        startActivity(intent);
+    private fun startAllNumbersExercise() {
+        val intent = Intent(this, AllNumbersExerciseActivity::class.java)
+        startActivity(intent)
     }
 
-    private void startSelectiveExercise() {
-        String numberText = editTextNumber.getText().toString().trim();
-        
+    private fun startSelectiveExercise() {
+        val numberText = editTextNumber.text.toString().trim()
+
         if (numberText.isEmpty()) {
-            Toast.makeText(this, getString(R.string.invalid_number), Toast.LENGTH_SHORT).show();
-            return;
+            Toast.makeText(this, getString(R.string.invalid_number), Toast.LENGTH_SHORT).show()
+            return
         }
 
         try {
-            int number = Integer.parseInt(numberText);
+            val number = numberText.toInt()
             if (number < 2 || number > 9) {
-                Toast.makeText(this, getString(R.string.invalid_number), Toast.LENGTH_SHORT).show();
-                return;
+                Toast.makeText(this, getString(R.string.invalid_number), Toast.LENGTH_SHORT).show()
+                return
             }
 
-            Intent intent = new Intent(this, SelectiveExerciseActivity.class);
-            intent.putExtra("selected_number", number);
-            startActivity(intent);
-        } catch (NumberFormatException e) {
-            Toast.makeText(this, getString(R.string.invalid_number), Toast.LENGTH_SHORT).show();
+            val intent = Intent(this, SelectiveExerciseActivity::class.java)
+            intent.putExtra("selected_number", number)
+            startActivity(intent)
+        } catch (_: NumberFormatException) {
+            Toast.makeText(this, getString(R.string.invalid_number), Toast.LENGTH_SHORT).show()
         }
     }
 }
+
+

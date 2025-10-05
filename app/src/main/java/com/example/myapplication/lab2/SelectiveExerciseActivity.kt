@@ -1,156 +1,151 @@
-package com.example.myapplication.lab2;
+package com.example.myapplication.lab2
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ProgressBar;
-import android.widget.TextView;
+import android.content.Intent
+import android.os.Bundle
+import android.view.View
+import android.widget.Button
+import android.widget.ProgressBar
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
+import com.example.myapplication.R
+import com.google.android.material.textfield.TextInputEditText
+import java.util.Random
 
-import androidx.appcompat.app.AppCompatActivity;
+class SelectiveExerciseActivity : AppCompatActivity() {
 
-import androidx.cardview.widget.CardView;
+    private lateinit var progressText: TextView
+    private lateinit var questionText: TextView
+    private lateinit var resultText: TextView
+    private lateinit var editTextAnswer: TextInputEditText
+    private lateinit var checkButton: Button
+    private lateinit var nextButton: Button
+    private lateinit var progressBar: ProgressBar
+    private lateinit var resultCard: CardView
 
-import com.example.myapplication.R;
-import com.google.android.material.textfield.TextInputEditText;
+    private lateinit var random: Random
+    private var selectedNumber: Int = 0
+    private var currentQuestion: Int = 0
+    private var correctAnswers: Int = 0
+    private var secondNumber: Int = 0
+    private var correctAnswer: Int = 0
+    private var isAnswerChecked: Boolean = false
 
-import java.util.Random;
-
-public class SelectiveExerciseActivity extends AppCompatActivity {
-
-    private TextView progressText, questionText, resultText;
-    private TextInputEditText editTextAnswer;
-    private Button checkButton, nextButton;
-    private ProgressBar progressBar;
-    private CardView resultCard;
-
-    private Random random;
-    private int selectedNumber;
-    private int currentQuestion = 0;
-    private int correctAnswers = 0;
-    private int secondNumber, correctAnswer;
-    private boolean isAnswerChecked = false;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_selective_exercise);
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_selective_exercise)
 
         // Получаем выбранное число из Intent
-        selectedNumber = getIntent().getIntExtra("selected_number", 2);
-        
+        selectedNumber = intent.getIntExtra("selected_number", 2)
+
         // Добавляем стрелочку назад в ActionBar
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setDisplayShowTitleEnabled(false);
-        }
-        
-        random = new Random();
-        initViews();
-        setupClickListeners();
-        generateNewQuestion();
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+
+        random = Random()
+        initViews()
+        setupClickListeners()
+        generateNewQuestion()
     }
 
-    private void initViews() {
-        progressText = findViewById(R.id.progressText);
-        questionText = findViewById(R.id.questionText);
-        resultText = findViewById(R.id.resultText);
-        editTextAnswer = findViewById(R.id.editTextAnswer);
-        checkButton = findViewById(R.id.checkButton);
-        nextButton = findViewById(R.id.nextButton);
-        progressBar = findViewById(R.id.progressBar);
-        resultCard = findViewById(R.id.resultCard);
+    private fun initViews() {
+        progressText = findViewById(R.id.progressText)
+        questionText = findViewById(R.id.questionText)
+        resultText = findViewById(R.id.resultText)
+        editTextAnswer = findViewById(R.id.editTextAnswer)
+        checkButton = findViewById(R.id.checkButton)
+        nextButton = findViewById(R.id.nextButton)
+        progressBar = findViewById(R.id.progressBar)
+        resultCard = findViewById(R.id.resultCard)
     }
 
-    private void setupClickListeners() {
-        checkButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                checkAnswer();
+    private fun setupClickListeners() {
+        checkButton.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(v: View?) {
+                checkAnswer()
             }
-        });
+        })
 
-        nextButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        nextButton.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(v: View?) {
                 if (currentQuestion < 20) {
-                    generateNewQuestion();
+                    generateNewQuestion()
                 } else {
-                    finishExercise();
+                    finishExercise()
                 }
             }
-        });
+        })
     }
 
-    @Override
-    public boolean onSupportNavigateUp() {
-        finish();
-        return true;
+    override fun onSupportNavigateUp(): Boolean {
+        finish()
+        return true
     }
 
-    private void generateNewQuestion() {
-        currentQuestion++;
-        secondNumber = random.nextInt(8) + 2; // 2-9
-        correctAnswer = selectedNumber * secondNumber;
+    private fun generateNewQuestion() {
+        currentQuestion++
+        secondNumber = random.nextInt(8) + 2 // 2-9
+        correctAnswer = selectedNumber * secondNumber
 
-        questionText.setText(String.format(getString(R.string.question_format), selectedNumber, secondNumber));
-        editTextAnswer.setText("");
-        editTextAnswer.setEnabled(true);
-        checkButton.setEnabled(true);
-        resultCard.setVisibility(View.GONE);
-        isAnswerChecked = false; // Сбрасываем флаг проверки ответа
+        questionText.text = String.format(getString(R.string.question_format), selectedNumber, secondNumber)
+        editTextAnswer.setText("")
+        editTextAnswer.isEnabled = true
+        checkButton.isEnabled = true
+        resultCard.visibility = View.GONE
+        isAnswerChecked = false
 
-        updateProgress();
+        updateProgress()
     }
 
-    private void checkAnswer() {
-        if (isAnswerChecked) return;
+    private fun checkAnswer() {
+        if (isAnswerChecked) return
 
-        String answerText = editTextAnswer.getText().toString().trim();
+        val answerText = editTextAnswer.text.toString().trim()
         if (answerText.isEmpty()) {
-            editTextAnswer.setError("Введите ответ");
-            return;
+            editTextAnswer.error = "Введите ответ"
+            return
         }
 
         try {
-            int userAnswer = Integer.parseInt(answerText);
-            isAnswerChecked = true;
+            val userAnswer = answerText.toInt()
+            isAnswerChecked = true
 
             if (userAnswer == correctAnswer) {
-                correctAnswers++;
-                resultText.setText(getString(R.string.correct_answer));
-                resultText.setTextColor(getResources().getColor(android.R.color.holo_green_dark));
+                correctAnswers++
+                resultText.text = getString(R.string.correct_answer)
+                resultText.setTextColor(resources.getColor(android.R.color.holo_green_dark))
             } else {
-                resultText.setText(getString(R.string.incorrect_answer) + 
-                    "\nПравильный ответ: " + correctAnswer);
-                resultText.setTextColor(getResources().getColor(android.R.color.holo_red_dark));
+                resultText.text = getString(R.string.incorrect_answer) +
+                    "\nПравильный ответ: " + correctAnswer
+                resultText.setTextColor(resources.getColor(android.R.color.holo_red_dark))
             }
 
-            editTextAnswer.setEnabled(false);
-            checkButton.setEnabled(false);
-            resultCard.setVisibility(View.VISIBLE);
+            editTextAnswer.isEnabled = false
+            checkButton.isEnabled = false
+            resultCard.visibility = View.VISIBLE
 
             if (currentQuestion == 20) {
-                nextButton.setText(getString(R.string.finish_test));
+                nextButton.text = getString(R.string.finish_test)
             }
-
-        } catch (NumberFormatException e) {
-            editTextAnswer.setError("Введите корректное число");
+        } catch (_: NumberFormatException) {
+            editTextAnswer.error = "Введите корректное число"
         }
     }
 
-    private void updateProgress() {
-        progressText.setText("Вопрос " + currentQuestion + " из 20");
-        progressBar.setProgress(currentQuestion);
+    private fun updateProgress() {
+        progressText.text = "Вопрос $currentQuestion из 20"
+        progressBar.progress = currentQuestion
     }
 
-    private void finishExercise() {
-        Intent intent = new Intent(this, ExerciseResultsActivity.class);
-        intent.putExtra("correct_answers", correctAnswers);
-        intent.putExtra("total_questions", 20);
-        intent.putExtra("exercise_type", "selective");
-        intent.putExtra("selected_number", selectedNumber);
-        startActivity(intent);
-        finish();
+    private fun finishExercise() {
+        val intent = Intent(this, ExerciseResultsActivity::class.java)
+        intent.putExtra("correct_answers", correctAnswers)
+        intent.putExtra("total_questions", 20)
+        intent.putExtra("exercise_type", "selective")
+        intent.putExtra("selected_number", selectedNumber)
+        startActivity(intent)
+        finish()
     }
 }
+
+
