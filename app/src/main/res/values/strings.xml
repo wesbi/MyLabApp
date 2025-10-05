@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">Мои Задания</string>
+    <string name="main_title">Выберите задание</string>
+    <string name="task1_title">Задание №1: Квадратное уравнение</string>
+    <string name="task1_description">Решение квадратного уравнения ax² + bx + c = 0</string>
+    <string name="task2_title">Задание №2: Таблица умножения</string>
+    <string name="task2_description">Изучение таблицы умножения с упражнениями</string>
+    <string name="multiplication_table_title">Таблица умножения</string>
+    <string name="all_numbers_button">Упражнение для всех чисел</string>
+    <string name="selective_button">Упражнение выборочно</string>
+    <string name="enter_number_hint">Введите число от 2 до 9</string>
+    <string name="start_exercise">Начать упражнение</string>
+    <string name="correct_answer">Правильный ответ!</string>
+    <string name="incorrect_answer">Неверный ответ</string>
+    <string name="enter_answer_hint">Введите ответ</string>
+    <string name="next_question">Следующий вопрос</string>
+    <string name="finish_test">Завершить тест</string>
+    <string name="test_results">Результаты теста</string>
+    <string name="correct_answers_count">Правильных ответов: %d из 20</string>
+    <string name="percentage">Процент правильных ответов: %.1f%%</string>
+    <string name="question_format">%d × %d = ?</string>
+    <string name="invalid_number">Пожалуйста, введите число от 2 до 9</string>
+    <string name="coefficient_a">Коэффициент a:</string>
+    <string name="coefficient_b">Коэффициент b:</string>
+    <string name="coefficient_c">Коэффициент c:</string>
+    <string name="solve_button">Решить</string>
+    <string name="back_button">Назад</string>
+    <string name="no_solution">Нет решения</string>
+    <string name="result_title">Результат:</string>
+    <string name="enter_coefficients">Введите коэффициенты квадратного уравнения</string>
+    <string name="lab3_title">Лабораторная работа №3</string>
+    <string name="lab3_subtitle">Загрузка изображений и сбор информации на АЗС</string>
+    <string name="lab3_task1_title">Задание 1: Угадай знаменитость</string>
+    <string name="lab3_task1_description">Угадывание знаменитостей по фотографиии</string>
+    <string name="lab3_task2_title">Задание 2: Сбор информации</string>
+    <string name="lab3_task2_description">Сбор информации на АЗС</string>
+</resources>
