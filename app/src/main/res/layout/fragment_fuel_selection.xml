@@ -8,19 +8,19 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:gravity="center"
         android:text="Заправка автомобиля"
         android:textSize="24sp"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:layout_marginBottom="24dp" />
+        android:textStyle="bold" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
         android:text="Выберите вид топлива:"
         android:textSize="18sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="16dp" />
+        android:textStyle="bold" />
 
     <Spinner
         android:id="@+id/spinnerFuelType"
@@ -31,62 +31,62 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
         android:text="Количество топлива (литры):"
         android:textSize="18sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="16dp" />
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/editTextQuantity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
         android:hint="Введите количество литров"
         android:inputType="numberDecimal"
-        android:textSize="16sp"
-        android:layout_marginBottom="16dp" />
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/textViewPriceInfo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:text="Цена: 0.00 руб/л"
-        android:textSize="16sp"
         android:textColor="#666666"
-        android:layout_marginBottom="8dp" />
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/textViewTotalPrice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
         android:text="Итого: 0.00 руб"
-        android:textSize="18sp"
-        android:textStyle="bold"
         android:textColor="#2196F3"
-        android:layout_marginBottom="32dp" />
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/buttonNewOrder"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
+            android:layout_marginEnd="8dp"
             android:layout_weight="1"
             android:text="Новый заказ"
-            android:textSize="16sp"
-            android:layout_marginEnd="8dp" />
+            android:textSize="16sp" />
 
         <Button
             android:id="@+id/buttonFinishShift"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:layout_weight="1"
             android:text="Завершение смены"
-            android:textSize="16sp"
-            android:layout_marginStart="8dp" />
+            android:textSize="16sp" />
 
     </LinearLayout>
 

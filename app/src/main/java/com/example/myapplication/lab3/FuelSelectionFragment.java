@@ -128,12 +128,9 @@ public class FuelSelectionFragment extends Fragment {
         buttonFinishShift.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (validateInput()) {
-                    FuelSale fuelSale = new FuelSale(selectedFuelType, quantity);
-                    if (listener != null) {
-                        listener.onFuelSale(fuelSale);
-                        listener.onFinishShift();
-                    }
+                // Завершение смены без добавления продажи и без валидации полей
+                if (listener != null) {
+                    listener.onFinishShift();
                 }
             }
         });

@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">Мои Задания</string>
-    <string name="main_title">Выберите задание</string>
+    <string name="app_name">ЛР</string>
+    <string name="main_title">Выберите ЛР</string>
     <string name="task1_title">Задание №1: Квадратное уравнение</string>
     <string name="task1_description">Решение квадратного уравнения ax² + bx + c = 0</string>
     <string name="task2_title">Задание №2: Таблица умножения</string>
